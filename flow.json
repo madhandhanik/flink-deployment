@@ -1,0 +1,615 @@
+{
+  "pipelineState" : {
+    "doc_type" : "pipeline",
+    "version" : "3.0",
+    "json_schema" : "http://api.dataplatform.ibm.com/schemas/common-pipeline/pipeline-flow/pipeline-flow-v3-schema.json",
+    "id" : "d036b1c0-0b1e-45eb-8097-12cb60b12d56",
+    "primary_pipeline" : "65c277b3-02ac-4fa2-a322-d19e0c4903db",
+    "pipelines" : [ {
+      "id" : "65c277b3-02ac-4fa2-a322-d19e0c4903db",
+      "nodes" : [ {
+        "id" : "b495b00b-e15c-40d1-8a24-69687e14ed95",
+        "type" : "source",
+        "app_data" : {
+          "node_type" : "source",
+          "ui_data" : {
+            "label" : "ORDERS",
+            "image" : "/images/svg/source.svg",
+            "x_pos" : 50,
+            "y_pos" : 50
+          }
+        },
+        "outputs" : [ {
+          "id" : "outPort",
+          "app_data" : {
+            "ui_data" : {
+              "cardinality" : {
+                "min" : 0,
+                "max" : -1
+              },
+              "label" : "Output Port"
+            }
+          }
+        } ]
+      }, {
+        "id" : "7891eb22-5407-44b0-98d5-eb5291eafbcb",
+        "type" : "filter",
+        "app_data" : {
+          "node_type" : "filter",
+          "ui_data" : {
+            "label" : "large orders",
+            "image" : "/images/svg/filter.svg",
+            "x_pos" : 412,
+            "y_pos" : 52
+          }
+        },
+        "inputs" : [ {
+          "id" : "inPort",
+          "app_data" : {
+            "ui_data" : {
+              "cardinality" : {
+                "min" : 0,
+                "max" : 1
+              },
+              "label" : "Input Port"
+            }
+          },
+          "links" : [ {
+            "id" : "83d3c23f-dccd-4007-aa83-2228b64654a1",
+            "node_id_ref" : "b495b00b-e15c-40d1-8a24-69687e14ed95",
+            "port_id_ref" : "outPort"
+          } ]
+        } ],
+        "outputs" : [ {
+          "id" : "outPort",
+          "app_data" : {
+            "ui_data" : {
+              "cardinality" : {
+                "min" : 0,
+                "max" : -1
+              },
+              "label" : "Output Port"
+            }
+          }
+        } ]
+      }, {
+        "id" : "b5c14c76-9f0f-41d5-9ce5-b5792fe4a1ce",
+        "type" : "source",
+        "app_data" : {
+          "node_type" : "source",
+          "ui_data" : {
+            "label" : "Cancellations",
+            "image" : "/images/svg/source.svg",
+            "x_pos" : 20,
+            "y_pos" : 145
+          }
+        },
+        "outputs" : [ {
+          "id" : "outPort",
+          "app_data" : {
+            "ui_data" : {
+              "cardinality" : {
+                "min" : 0,
+                "max" : -1
+              },
+              "label" : "Output Port"
+            }
+          }
+        } ]
+      }, {
+        "id" : "bcf61f2f-1c34-48c3-93fc-160f0b70d949",
+        "type" : "intervalJoin",
+        "app_data" : {
+          "node_type" : "intervalJoin",
+          "ui_data" : {
+            "label" : "Cancelled large orders",
+            "image" : "/images/svg/intervalJoin.svg",
+            "x_pos" : 418,
+            "y_pos" : 380
+          }
+        },
+        "inputs" : [ {
+          "id" : "inPort",
+          "app_data" : {
+            "ui_data" : {
+              "cardinality" : {
+                "min" : 0,
+                "max" : 2
+              },
+              "label" : "Input Port"
+            }
+          },
+          "links" : [ {
+            "id" : "d3d6600f-a84d-45ce-b3ba-f7ec58ce17c0",
+            "node_id_ref" : "7891eb22-5407-44b0-98d5-eb5291eafbcb",
+            "port_id_ref" : "outPort"
+          }, {
+            "id" : "da082bc9-d04a-43fa-bf88-a7a02eaa0000",
+            "node_id_ref" : "b5c14c76-9f0f-41d5-9ce5-b5792fe4a1ce",
+            "port_id_ref" : "outPort"
+          } ]
+        } ],
+        "outputs" : [ {
+          "id" : "outPort",
+          "app_data" : {
+            "ui_data" : {
+              "cardinality" : {
+                "min" : 0,
+                "max" : -1
+              },
+              "label" : "Output Port"
+            }
+          }
+        } ]
+      }, {
+        "id" : "bc20fe7c-b27d-4940-b566-7f6355889a79",
+        "type" : "filter",
+        "app_data" : {
+          "node_type" : "filter",
+          "ui_data" : {
+            "label" : "small order",
+            "image" : "/images/svg/filter.svg",
+            "x_pos" : 517,
+            "y_pos" : -85
+          }
+        },
+        "inputs" : [ {
+          "id" : "inPort",
+          "app_data" : {
+            "ui_data" : {
+              "cardinality" : {
+                "min" : 0,
+                "max" : 1
+              },
+              "label" : "Input Port"
+            }
+          },
+          "links" : [ {
+            "id" : "cd8c3bc2-f4c5-453c-abd2-ef19a75d523e",
+            "node_id_ref" : "b495b00b-e15c-40d1-8a24-69687e14ed95",
+            "port_id_ref" : "outPort"
+          } ]
+        } ],
+        "outputs" : [ {
+          "id" : "outPort",
+          "app_data" : {
+            "ui_data" : {
+              "cardinality" : {
+                "min" : 0,
+                "max" : -1
+              },
+              "label" : "Output Port"
+            }
+          }
+        } ]
+      }, {
+        "id" : "2d6ce800-9456-4ecb-9453-b8fd58cf0574",
+        "type" : "intervalJoin",
+        "app_data" : {
+          "node_type" : "intervalJoin",
+          "ui_data" : {
+            "label" : "suspicious orders",
+            "image" : "/images/svg/intervalJoin.svg",
+            "x_pos" : 807,
+            "y_pos" : 218
+          }
+        },
+        "inputs" : [ {
+          "id" : "inPort",
+          "app_data" : {
+            "ui_data" : {
+              "cardinality" : {
+                "min" : 0,
+                "max" : 2
+              },
+              "label" : "Input Port"
+            }
+          },
+          "links" : [ {
+            "id" : "4782b536-cd2b-4a5e-bf96-22f17e7736e1",
+            "node_id_ref" : "bc20fe7c-b27d-4940-b566-7f6355889a79",
+            "port_id_ref" : "outPort"
+          }, {
+            "id" : "68f51376-d5c0-4e24-914f-cae97da3d1f8",
+            "node_id_ref" : "bcf61f2f-1c34-48c3-93fc-160f0b70d949",
+            "port_id_ref" : "outPort"
+          } ]
+        } ],
+        "outputs" : [ {
+          "id" : "outPort",
+          "app_data" : {
+            "ui_data" : {
+              "cardinality" : {
+                "min" : 0,
+                "max" : -1
+              },
+              "label" : "Output Port"
+            }
+          }
+        } ]
+      }, {
+        "id" : "a39669e7-7c2c-4675-8cfd-020b3a9b318c",
+        "type" : "sink",
+        "app_data" : {
+          "node_type" : "sink",
+          "ui_data" : {
+            "label" : "suspiciousorder",
+            "image" : "/images/svg/sink.svg",
+            "x_pos" : 1138,
+            "y_pos" : 179
+          }
+        },
+        "inputs" : [ {
+          "id" : "inPort",
+          "app_data" : {
+            "ui_data" : {
+              "cardinality" : {
+                "min" : 0,
+                "max" : 1
+              },
+              "label" : "Input port"
+            }
+          },
+          "links" : [ {
+            "id" : "26610f4d-4009-48a2-b8e3-f183b46ec5f3",
+            "node_id_ref" : "2d6ce800-9456-4ecb-9453-b8fd58cf0574",
+            "port_id_ref" : "outPort"
+          } ]
+        } ]
+      } ],
+      "app_data" : {
+        "ui_data" : {
+          "comments" : [ ]
+        }
+      },
+      "runtime_ref" : ""
+    } ],
+    "schemas" : [ ]
+  },
+  "contextState" : {
+    "nodes" : [ {
+      "nodeId" : "b495b00b-e15c-40d1-8a24-69687e14ed95",
+      "nodeType" : "source",
+      "viewName" : "ORDERS",
+      "configuration" : {
+        "securityProtocol" : "SASL_SSL",
+        "topic" : "ORDERS",
+        "startUpMode" : "earliest-offset",
+        "credentials" : {
+          "type" : "SASL",
+          "data" : {
+            "username" : "<username_redacted>",
+            "password" : "<password_redacted>",
+            "mechanism" : "PLAIN"
+          }
+        },
+        "truststoreCertificates" : [ {
+          "pem" : "-----BEGIN CERTIFICATE-----\nMIILsTCCCpmgAwIBAgIRAMtsmsGBOl06EE14hgLWyOgwDQYJKoZIhvcNAQELBQAwUDEmMCQGA1UEChMdSUJNIEV2ZW50IEVuZHBvaW50IE1hbmFnZW1lbnQxJjAkBgNVBAMTHUlCTSBFdmVudCBFbmRwb2ludCBNYW5hZ2VtZW50MB4XDTI1MTAyMjE5NDU1MVoXDTI2MDEyMDE5NDU1MVowKDEmMCQGA1UEChMdSUJNIEV2ZW50IEVuZHBvaW50IE1hbmFnZW1lbnQwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDKDNtOe9BdzoP5JWam9QzAJQ5IoIh1WE5p4g51XExGIb0qK/52WmH2ns8b6BRE5dElQRqUPoxl1rLiNonr+ZxQJN+vCPD11IF8/MUxMmNHJyKxgV9xzaoP1XAE3r1ziR79NOLKyHksti/+NhrftqhsR7vVDDy14Xf6tlmlqppeQ/c+g3RnUYYEhafx78moQnTdMYF3UqIdJ5RjPiZB8WQ6hOQ8WCDtQIy4gu+42hEewb9htHiJp9FR6HTew+SnzRDSI2yQGR9EkG4JPoOhyMKr9YCQ6nUOg5wlO723nJzGM0wsX9/WJ20mY8O35toMA0fGl8w1WaLpYl4CT0TEGuDhAgMBAAGjggisMIIIqDAOBgNVHQ8BAf8EBAMCB4AwHQYDVR0lBBYwFAYIKwYBBQUHAwIGCCsGAQUFBwMBMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAU1va7xVuUY6vm2dOqLIPdfbWu9WkwgghGBgNVHREEggg9MIIIOYIrbXktZWVtLWdhdGV3YXktaWJtLWVndy1zdmMuZXZlbnQtYXV0b21hdGlvboIvbXktZWVtLWdhdGV3YXktaWJtLWVndy1zdmMuZXZlbnQtYXV0b21hdGlvbi5zdmOCPW15LWVlbS1nYXRld2F5LWlibS1lZ3ctc3ZjLmV2ZW50LWF1dG9tYXRpb24uc3ZjLmNsdXN0ZXIubG9jYWyCXW15LWVlbS1nYXRld2F5LWlibS1lZ3ctcnQtZXZlbnQtYXV0b21hdGlvbi5hcHBzLjY4ZjhmZWMyMjg4NDBhM2Q5ZmMyNzJiZC5hbTEudGVjaHpvbmUuaWJtLmNvbYJfbXktZWVtLWdhdGV3YXktaWJtLWVndy1ydC0xLWV2ZW50LWF1dG9tYXRpb24uYXBwcy42OGY4ZmVjMjI4ODQwYTNkOWZjMjcyYmQuYW0xLnRlY2h6b25lLmlibS5jb22CYG15LWVlbS1nYXRld2F5LWlibS1lZ3ctcnQtMTAtZXZlbnQtYXV0b21hdGlvbi5hcHBzLjY4ZjhmZWMyMjg4NDBhM2Q5ZmMyNzJiZC5hbTEudGVjaHpvbmUuaWJtLmNvbYJgbXktZWVtLWdhdGV3YXktaWJtLWVndy1ydC0xMS1ldmVudC1hdXRvbWF0aW9uLmFwcHMuNjhmOGZlYzIyODg0MGEzZDlmYzI3MmJkLmFtMS50ZWNoem9uZS5pYm0uY29tgmBteS1lZW0tZ2F0ZXdheS1pYm0tZWd3LXJ0LTEyLWV2ZW50LWF1dG9tYXRpb24uYXBwcy42OGY4ZmVjMjI4ODQwYTNkOWZjMjcyYmQuYW0xLnRlY2h6b25lLmlibS5jb22CYG15LWVlbS1nYXRld2F5LWlibS1lZ3ctcnQtMTMtZXZlbnQtYXV0b21hdGlvbi5hcHBzLjY4ZjhmZWMyMjg4NDBhM2Q5ZmMyNzJiZC5hbTEudGVjaHpvbmUuaWJtLmNvbYJgbXktZWVtLWdhdGV3YXktaWJtLWVndy1ydC0xNC1ldmVudC1hdXRvbWF0aW9uLmFwcHMuNjhmOGZlYzIyODg0MGEzZDlmYzI3MmJkLmFtMS50ZWNoem9uZS5pYm0uY29tgmBteS1lZW0tZ2F0ZXdheS1pYm0tZWd3LXJ0LTE1LWV2ZW50LWF1dG9tYXRpb24uYXBwcy42OGY4ZmVjMjI4ODQwYTNkOWZjMjcyYmQuYW0xLnRlY2h6b25lLmlibS5jb22CYG15LWVlbS1nYXRld2F5LWlibS1lZ3ctcnQtMTYtZXZlbnQtYXV0b21hdGlvbi5hcHBzLjY4ZjhmZWMyMjg4NDBhM2Q5ZmMyNzJiZC5hbTEudGVjaHpvbmUuaWJtLmNvbYJgbXktZWVtLWdhdGV3YXktaWJtLWVndy1ydC0xNy1ldmVudC1hdXRvbWF0aW9uLmFwcHMuNjhmOGZlYzIyODg0MGEzZDlmYzI3MmJkLmFtMS50ZWNoem9uZS5pYm0uY29tgmBteS1lZW0tZ2F0ZXdheS1pYm0tZWd3LXJ0LTE4LWV2ZW50LWF1dG9tYXRpb24uYXBwcy42OGY4ZmVjMjI4ODQwYTNkOWZjMjcyYmQuYW0xLnRlY2h6b25lLmlibS5jb22CYG15LWVlbS1nYXRld2F5LWlibS1lZ3ctcnQtMTktZXZlbnQtYXV0b21hdGlvbi5hcHBzLjY4ZjhmZWMyMjg4NDBhM2Q5ZmMyNzJiZC5hbTEudGVjaHpvbmUuaWJtLmNvbYJfbXktZWVtLWdhdGV3YXktaWJtLWVndy1ydC0yLWV2ZW50LWF1dG9tYXRpb24uYXBwcy42OGY4ZmVjMjI4ODQwYTNkOWZjMjcyYmQuYW0xLnRlY2h6b25lLmlibS5jb22CX215LWVlbS1nYXRld2F5LWlibS1lZ3ctcnQtMy1ldmVudC1hdXRvbWF0aW9uLmFwcHMuNjhmOGZlYzIyODg0MGEzZDlmYzI3MmJkLmFtMS50ZWNoem9uZS5pYm0uY29tgl9teS1lZW0tZ2F0ZXdheS1pYm0tZWd3LXJ0LTQtZXZlbnQtYXV0b21hdGlvbi5hcHBzLjY4ZjhmZWMyMjg4NDBhM2Q5ZmMyNzJiZC5hbTEudGVjaHpvbmUuaWJtLmNvbYJfbXktZWVtLWdhdGV3YXktaWJtLWVndy1ydC01LWV2ZW50LWF1dG9tYXRpb24uYXBwcy42OGY4ZmVjMjI4ODQwYTNkOWZjMjcyYmQuYW0xLnRlY2h6b25lLmlibS5jb22CX215LWVlbS1nYXRld2F5LWlibS1lZ3ctcnQtNi1ldmVudC1hdXRvbWF0aW9uLmFwcHMuNjhmOGZlYzIyODg0MGEzZDlmYzI3MmJkLmFtMS50ZWNoem9uZS5pYm0uY29tgl9teS1lZW0tZ2F0ZXdheS1pYm0tZWd3LXJ0LTctZXZlbnQtYXV0b21hdGlvbi5hcHBzLjY4ZjhmZWMyMjg4NDBhM2Q5ZmMyNzJiZC5hbTEudGVjaHpvbmUuaWJtLmNvbYJfbXktZWVtLWdhdGV3YXktaWJtLWVndy1ydC04LWV2ZW50LWF1dG9tYXRpb24uYXBwcy42OGY4ZmVjMjI4ODQwYTNkOWZjMjcyYmQuYW0xLnRlY2h6b25lLmlibS5jb22CX215LWVlbS1nYXRld2F5LWlibS1lZ3ctcnQtOS1ldmVudC1hdXRvbWF0aW9uLmFwcHMuNjhmOGZlYzIyODg0MGEzZDlmYzI3MmJkLmFtMS50ZWNoem9uZS5pYm0uY29tMA0GCSqGSIb3DQEBCwUAA4IBAQAXpNZvAU0B6ETqymDO0FwKmzrZfk5AfUgkaITlr4yjZFExNJTMJebXIYF+9475ivpg9pxVSvWJQ2ngQc95CgLiiYA/OodP+AfLHf6NMmeDw9SbDFl4pN2wk5Z4dEojBAwhiFosKN0zSdY6y4j72+iZHJ/rrm/QGsEDAqy+0u0jRQBncE1/mwUs1t/XaXkFTGlMpy9M5Rrfgiu/k+wGuVQ2H8xxI8asWcDzjEU6OsAp4ElD+5eHr1CM1spjOYa5K+Xjdx27YJE16tlNMFpTIyiR8E2Uz5Ys86l5tnzfEaaCNPsXxmJekFImUdmvbCFxs8feCtQe8xevmUAFSoYVSlXu\n-----END CERTIFICATE-----\n",
+          "subject" : "O=IBM Event Endpoint Management",
+          "issuer" : "CN=IBM Event Endpoint Management, O=IBM Event Endpoint Management",
+          "expiry" : 1761162351000
+        } ],
+        "fields" : [ {
+          "name" : "key.value",
+          "selected" : false,
+          "headerKey" : "",
+          "type" : "STRING",
+          "kind" : "key"
+        }, {
+          "name" : "apicurio.value.globalId",
+          "selected" : false,
+          "headerKey" : "apicurio.value.globalId",
+          "type" : "STRING",
+          "kind" : "header"
+        }, {
+          "name" : "apicurio.value.encoding",
+          "selected" : false,
+          "headerKey" : "apicurio.value.encoding",
+          "type" : "STRING",
+          "kind" : "header"
+        }, {
+          "name" : "id",
+          "selected" : true,
+          "type" : "STRING",
+          "nullable" : false,
+          "avroType" : "STRING"
+        }, {
+          "name" : "customer",
+          "selected" : true,
+          "type" : "STRING",
+          "nullable" : false,
+          "avroType" : "STRING"
+        }, {
+          "name" : "customerid",
+          "selected" : true,
+          "type" : "STRING",
+          "nullable" : false,
+          "avroType" : "STRING"
+        }, {
+          "name" : "description",
+          "selected" : true,
+          "type" : "STRING",
+          "nullable" : false,
+          "avroType" : "STRING"
+        }, {
+          "name" : "price",
+          "selected" : true,
+          "type" : "DOUBLE",
+          "nullable" : false,
+          "avroType" : "DOUBLE"
+        }, {
+          "name" : "quantity",
+          "selected" : true,
+          "type" : "BIGINT",
+          "nullable" : false,
+          "avroType" : "BIGINT"
+        }, {
+          "name" : "region",
+          "selected" : true,
+          "type" : "STRING",
+          "nullable" : false,
+          "avroType" : "STRING"
+        }, {
+          "name" : "ordertime",
+          "selected" : true,
+          "type" : "STRING",
+          "nullable" : false,
+          "avroType" : "STRING"
+        } ],
+        "watermark" : {
+          "watermarkWithEventSource" : true,
+          "topicLocalTimeRequired" : true,
+          "watermarkColumn" : "event_time",
+          "interval" : 1,
+          "timeUnit" : "MINUTE"
+        },
+        "bootstrapServers" : [ "my-eem-gateway-ibm-egw-rt-event-automation.apps.68f8fec228840a3d9fc272bd.am1.techzone.ibm.com:443" ],
+        "isolationLevel" : "read_committed",
+        "format" : "avro",
+        "topicPayload" : "{\n  \"namespace\": \"com.loosehangerjeans\",\n  \"type\": \"record\",\n  \"name\": \"Order\",\n  \"fields\": [\n    {\n      \"name\": \"id\",\n      \"type\": \"string\",\n      \"logicalType\": \"uuid\",\n      \"doc\": \"order id\"\n    },\n    {\n      \"name\": \"customer\",\n      \"type\": \"string\",\n      \"doc\": \"Name of the customer who made the order\"\n    },\n    {\n      \"name\": \"customerid\",\n      \"type\": \"string\",\n      \"logicalType\": \"uuid\",\n      \"doc\": \"unique id for the customer who made the order\"\n    },\n    {\n      \"name\": \"description\",\n      \"type\": \"string\",\n      \"doc\": \"Description of the product that was ordered\"\n    },\n    {\n      \"name\": \"price\",\n      \"type\": \"double\",\n      \"doc\": \"Unit price of an individual item at the time of the order\"\n    },\n    {\n      \"name\": \"quantity\",\n      \"type\": \"long\",\n      \"doc\": \"Number of the items that was purchased in the order\"\n    },\n    {\n      \"name\": \"region\",\n      \"type\": \"string\",\n      \"doc\": \"which region the order was made in - will be one of NA, SA, EMEA, APAC, ANZ\"\n    },\n    {\n      \"name\": \"ordertime\",\n      \"type\": \"string\",\n      \"doc\": \"time that the order was made\"\n    }\n  ]\n}"
+      }
+    }, {
+      "nodeId" : "7891eb22-5407-44b0-98d5-eb5291eafbcb",
+      "nodeType" : "filter",
+      "viewName" : "large orders",
+      "configuration" : {
+        "statement" : "`quantity` >= 5"
+      }
+    }, {
+      "nodeId" : "b5c14c76-9f0f-41d5-9ce5-b5792fe4a1ce",
+      "nodeType" : "source",
+      "viewName" : "Cancellations",
+      "configuration" : {
+        "securityProtocol" : "SASL_SSL",
+        "topic" : "CANCELS",
+        "startUpMode" : "earliest-offset",
+        "credentials" : {
+          "type" : "SASL",
+          "data" : {
+            "username" : "<username_redacted>",
+            "password" : "<password_redacted>",
+            "mechanism" : "PLAIN"
+          }
+        },
+        "truststoreCertificates" : [ {
+          "pem" : "-----BEGIN CERTIFICATE-----\nMIILsTCCCpmgAwIBAgIRAMtsmsGBOl06EE14hgLWyOgwDQYJKoZIhvcNAQELBQAwUDEmMCQGA1UEChMdSUJNIEV2ZW50IEVuZHBvaW50IE1hbmFnZW1lbnQxJjAkBgNVBAMTHUlCTSBFdmVudCBFbmRwb2ludCBNYW5hZ2VtZW50MB4XDTI1MTAyMjE5NDU1MVoXDTI2MDEyMDE5NDU1MVowKDEmMCQGA1UEChMdSUJNIEV2ZW50IEVuZHBvaW50IE1hbmFnZW1lbnQwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDKDNtOe9BdzoP5JWam9QzAJQ5IoIh1WE5p4g51XExGIb0qK/52WmH2ns8b6BRE5dElQRqUPoxl1rLiNonr+ZxQJN+vCPD11IF8/MUxMmNHJyKxgV9xzaoP1XAE3r1ziR79NOLKyHksti/+NhrftqhsR7vVDDy14Xf6tlmlqppeQ/c+g3RnUYYEhafx78moQnTdMYF3UqIdJ5RjPiZB8WQ6hOQ8WCDtQIy4gu+42hEewb9htHiJp9FR6HTew+SnzRDSI2yQGR9EkG4JPoOhyMKr9YCQ6nUOg5wlO723nJzGM0wsX9/WJ20mY8O35toMA0fGl8w1WaLpYl4CT0TEGuDhAgMBAAGjggisMIIIqDAOBgNVHQ8BAf8EBAMCB4AwHQYDVR0lBBYwFAYIKwYBBQUHAwIGCCsGAQUFBwMBMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAU1va7xVuUY6vm2dOqLIPdfbWu9WkwgghGBgNVHREEggg9MIIIOYIrbXktZWVtLWdhdGV3YXktaWJtLWVndy1zdmMuZXZlbnQtYXV0b21hdGlvboIvbXktZWVtLWdhdGV3YXktaWJtLWVndy1zdmMuZXZlbnQtYXV0b21hdGlvbi5zdmOCPW15LWVlbS1nYXRld2F5LWlibS1lZ3ctc3ZjLmV2ZW50LWF1dG9tYXRpb24uc3ZjLmNsdXN0ZXIubG9jYWyCXW15LWVlbS1nYXRld2F5LWlibS1lZ3ctcnQtZXZlbnQtYXV0b21hdGlvbi5hcHBzLjY4ZjhmZWMyMjg4NDBhM2Q5ZmMyNzJiZC5hbTEudGVjaHpvbmUuaWJtLmNvbYJfbXktZWVtLWdhdGV3YXktaWJtLWVndy1ydC0xLWV2ZW50LWF1dG9tYXRpb24uYXBwcy42OGY4ZmVjMjI4ODQwYTNkOWZjMjcyYmQuYW0xLnRlY2h6b25lLmlibS5jb22CYG15LWVlbS1nYXRld2F5LWlibS1lZ3ctcnQtMTAtZXZlbnQtYXV0b21hdGlvbi5hcHBzLjY4ZjhmZWMyMjg4NDBhM2Q5ZmMyNzJiZC5hbTEudGVjaHpvbmUuaWJtLmNvbYJgbXktZWVtLWdhdGV3YXktaWJtLWVndy1ydC0xMS1ldmVudC1hdXRvbWF0aW9uLmFwcHMuNjhmOGZlYzIyODg0MGEzZDlmYzI3MmJkLmFtMS50ZWNoem9uZS5pYm0uY29tgmBteS1lZW0tZ2F0ZXdheS1pYm0tZWd3LXJ0LTEyLWV2ZW50LWF1dG9tYXRpb24uYXBwcy42OGY4ZmVjMjI4ODQwYTNkOWZjMjcyYmQuYW0xLnRlY2h6b25lLmlibS5jb22CYG15LWVlbS1nYXRld2F5LWlibS1lZ3ctcnQtMTMtZXZlbnQtYXV0b21hdGlvbi5hcHBzLjY4ZjhmZWMyMjg4NDBhM2Q5ZmMyNzJiZC5hbTEudGVjaHpvbmUuaWJtLmNvbYJgbXktZWVtLWdhdGV3YXktaWJtLWVndy1ydC0xNC1ldmVudC1hdXRvbWF0aW9uLmFwcHMuNjhmOGZlYzIyODg0MGEzZDlmYzI3MmJkLmFtMS50ZWNoem9uZS5pYm0uY29tgmBteS1lZW0tZ2F0ZXdheS1pYm0tZWd3LXJ0LTE1LWV2ZW50LWF1dG9tYXRpb24uYXBwcy42OGY4ZmVjMjI4ODQwYTNkOWZjMjcyYmQuYW0xLnRlY2h6b25lLmlibS5jb22CYG15LWVlbS1nYXRld2F5LWlibS1lZ3ctcnQtMTYtZXZlbnQtYXV0b21hdGlvbi5hcHBzLjY4ZjhmZWMyMjg4NDBhM2Q5ZmMyNzJiZC5hbTEudGVjaHpvbmUuaWJtLmNvbYJgbXktZWVtLWdhdGV3YXktaWJtLWVndy1ydC0xNy1ldmVudC1hdXRvbWF0aW9uLmFwcHMuNjhmOGZlYzIyODg0MGEzZDlmYzI3MmJkLmFtMS50ZWNoem9uZS5pYm0uY29tgmBteS1lZW0tZ2F0ZXdheS1pYm0tZWd3LXJ0LTE4LWV2ZW50LWF1dG9tYXRpb24uYXBwcy42OGY4ZmVjMjI4ODQwYTNkOWZjMjcyYmQuYW0xLnRlY2h6b25lLmlibS5jb22CYG15LWVlbS1nYXRld2F5LWlibS1lZ3ctcnQtMTktZXZlbnQtYXV0b21hdGlvbi5hcHBzLjY4ZjhmZWMyMjg4NDBhM2Q5ZmMyNzJiZC5hbTEudGVjaHpvbmUuaWJtLmNvbYJfbXktZWVtLWdhdGV3YXktaWJtLWVndy1ydC0yLWV2ZW50LWF1dG9tYXRpb24uYXBwcy42OGY4ZmVjMjI4ODQwYTNkOWZjMjcyYmQuYW0xLnRlY2h6b25lLmlibS5jb22CX215LWVlbS1nYXRld2F5LWlibS1lZ3ctcnQtMy1ldmVudC1hdXRvbWF0aW9uLmFwcHMuNjhmOGZlYzIyODg0MGEzZDlmYzI3MmJkLmFtMS50ZWNoem9uZS5pYm0uY29tgl9teS1lZW0tZ2F0ZXdheS1pYm0tZWd3LXJ0LTQtZXZlbnQtYXV0b21hdGlvbi5hcHBzLjY4ZjhmZWMyMjg4NDBhM2Q5ZmMyNzJiZC5hbTEudGVjaHpvbmUuaWJtLmNvbYJfbXktZWVtLWdhdGV3YXktaWJtLWVndy1ydC01LWV2ZW50LWF1dG9tYXRpb24uYXBwcy42OGY4ZmVjMjI4ODQwYTNkOWZjMjcyYmQuYW0xLnRlY2h6b25lLmlibS5jb22CX215LWVlbS1nYXRld2F5LWlibS1lZ3ctcnQtNi1ldmVudC1hdXRvbWF0aW9uLmFwcHMuNjhmOGZlYzIyODg0MGEzZDlmYzI3MmJkLmFtMS50ZWNoem9uZS5pYm0uY29tgl9teS1lZW0tZ2F0ZXdheS1pYm0tZWd3LXJ0LTctZXZlbnQtYXV0b21hdGlvbi5hcHBzLjY4ZjhmZWMyMjg4NDBhM2Q5ZmMyNzJiZC5hbTEudGVjaHpvbmUuaWJtLmNvbYJfbXktZWVtLWdhdGV3YXktaWJtLWVndy1ydC04LWV2ZW50LWF1dG9tYXRpb24uYXBwcy42OGY4ZmVjMjI4ODQwYTNkOWZjMjcyYmQuYW0xLnRlY2h6b25lLmlibS5jb22CX215LWVlbS1nYXRld2F5LWlibS1lZ3ctcnQtOS1ldmVudC1hdXRvbWF0aW9uLmFwcHMuNjhmOGZlYzIyODg0MGEzZDlmYzI3MmJkLmFtMS50ZWNoem9uZS5pYm0uY29tMA0GCSqGSIb3DQEBCwUAA4IBAQAXpNZvAU0B6ETqymDO0FwKmzrZfk5AfUgkaITlr4yjZFExNJTMJebXIYF+9475ivpg9pxVSvWJQ2ngQc95CgLiiYA/OodP+AfLHf6NMmeDw9SbDFl4pN2wk5Z4dEojBAwhiFosKN0zSdY6y4j72+iZHJ/rrm/QGsEDAqy+0u0jRQBncE1/mwUs1t/XaXkFTGlMpy9M5Rrfgiu/k+wGuVQ2H8xxI8asWcDzjEU6OsAp4ElD+5eHr1CM1spjOYa5K+Xjdx27YJE16tlNMFpTIyiR8E2Uz5Ys86l5tnzfEaaCNPsXxmJekFImUdmvbCFxs8feCtQe8xevmUAFSoYVSlXu\n-----END CERTIFICATE-----\n",
+          "subject" : "O=IBM Event Endpoint Management",
+          "issuer" : "CN=IBM Event Endpoint Management, O=IBM Event Endpoint Management",
+          "expiry" : 1761162351000
+        } ],
+        "fields" : [ {
+          "name" : "key.value",
+          "selected" : false,
+          "headerKey" : "",
+          "type" : "STRING",
+          "kind" : "key"
+        }, {
+          "name" : "apicurio.value.globalId",
+          "selected" : false,
+          "headerKey" : "apicurio.value.globalId",
+          "type" : "STRING",
+          "kind" : "header"
+        }, {
+          "name" : "apicurio.value.encoding",
+          "selected" : false,
+          "headerKey" : "apicurio.value.encoding",
+          "type" : "STRING",
+          "kind" : "header"
+        }, {
+          "name" : "id",
+          "selected" : true,
+          "type" : "STRING",
+          "nullable" : false,
+          "avroType" : "STRING"
+        }, {
+          "name" : "orderid",
+          "selected" : true,
+          "type" : "STRING",
+          "nullable" : false,
+          "avroType" : "STRING"
+        }, {
+          "name" : "canceltime",
+          "selected" : true,
+          "type" : "STRING",
+          "nullable" : false,
+          "avroType" : "STRING"
+        }, {
+          "name" : "reason",
+          "selected" : true,
+          "type" : "STRING",
+          "nullable" : false,
+          "avroType" : "STRING"
+        } ],
+        "watermark" : {
+          "watermarkWithEventSource" : true,
+          "topicLocalTimeRequired" : true,
+          "watermarkColumn" : "event_time",
+          "interval" : 1,
+          "timeUnit" : "MINUTE"
+        },
+        "bootstrapServers" : [ "my-eem-gateway-ibm-egw-rt-event-automation.apps.68f8fec228840a3d9fc272bd.am1.techzone.ibm.com:443" ],
+        "isolationLevel" : "read_committed",
+        "format" : "avro",
+        "topicPayload" : "{\n  \"namespace\": \"com.loosehangerjeans\",\n  \"type\": \"record\",\n  \"name\": \"Cancellation\",\n  \"fields\": [\n    {\n      \"name\": \"id\",\n      \"type\": \"string\",\n      \"logicalType\": \"uuid\",\n      \"doc\": \"id for the cancellation request\"\n    },\n    {\n      \"name\": \"orderid\",\n      \"type\": \"string\",\n      \"logicalType\": \"uuid\",\n      \"doc\": \"id of the order that was cancelled\"\n    },\n    {\n      \"name\": \"canceltime\",\n      \"type\": \"string\",\n      \"doc\": \"time that the order was cancelled\"\n    },\n    {\n      \"name\": \"reason\",\n      \"type\": \"string\",\n      \"doc\": \"reason given for the cancellation\"\n    }\n  ]\n}"
+      }
+    }, {
+      "nodeId" : "bcf61f2f-1c34-48c3-93fc-160f0b70d949",
+      "nodeType" : "intervalJoin",
+      "viewName" : "Cancelled large orders",
+      "configuration" : {
+        "joinType" : "inner",
+        "joinCondition" : "`large orders`.`id` = `Cancellations`.`orderid`",
+        "columns" : [ {
+          "outputColumn" : "description",
+          "input" : {
+            "column" : "description",
+            "table" : "large orders"
+          }
+        }, {
+          "outputColumn" : "order time",
+          "input" : {
+            "column" : "event_time",
+            "table" : "large orders"
+          }
+        }, {
+          "outputColumn" : "cancel time",
+          "input" : {
+            "column" : "event_time",
+            "table" : "Cancellations"
+          }
+        } ],
+        "timeCondition" : {
+          "baseTimeEvent" : {
+            "column" : "event_time",
+            "table" : "large orders"
+          },
+          "watchedTimeEvent" : {
+            "column" : "event_time",
+            "table" : "Cancellations"
+          },
+          "start" : {
+            "interval" : 0,
+            "timeUnit" : "MINUTE"
+          },
+          "end" : {
+            "interval" : 30,
+            "timeUnit" : "MINUTE"
+          }
+        }
+      }
+    }, {
+      "nodeId" : "bc20fe7c-b27d-4940-b566-7f6355889a79",
+      "nodeType" : "filter",
+      "viewName" : "small order",
+      "configuration" : {
+        "statement" : "`quantity` < 5"
+      }
+    }, {
+      "nodeId" : "2d6ce800-9456-4ecb-9453-b8fd58cf0574",
+      "nodeType" : "intervalJoin",
+      "viewName" : "suspicious orders",
+      "configuration" : {
+        "joinType" : "inner",
+        "joinCondition" : "`small order`.`description` = `Cancelled large orders`.`description`",
+        "columns" : [ {
+          "outputColumn" : "order id",
+          "input" : {
+            "column" : "id",
+            "table" : "small order"
+          }
+        }, {
+          "outputColumn" : "customer name",
+          "input" : {
+            "column" : "customer",
+            "table" : "small order"
+          }
+        }, {
+          "outputColumn" : "product",
+          "input" : {
+            "column" : "description",
+            "table" : "small order"
+          }
+        }, {
+          "outputColumn" : "small order time",
+          "input" : {
+            "column" : "event_time",
+            "table" : "small order"
+          }
+        } ],
+        "timeCondition" : {
+          "baseTimeEvent" : {
+            "column" : "order time",
+            "table" : "Cancelled large orders"
+          },
+          "watchedTimeEvent" : {
+            "column" : "event_time",
+            "table" : "small order"
+          },
+          "start" : {
+            "interval" : 0,
+            "timeUnit" : "MINUTE"
+          },
+          "end" : {
+            "interval" : 30,
+            "timeUnit" : "MINUTE"
+          }
+        }
+      }
+    }, {
+      "nodeId" : "a39669e7-7c2c-4675-8cfd-020b3a9b318c",
+      "nodeType" : "sink",
+      "viewName" : "suspiciousorder",
+      "configuration" : {
+        "securityProtocol" : "SASL_SSL",
+        "topic" : "FLINKOUT",
+        "credentials" : {
+          "type" : "SASL",
+          "data" : {
+            "username" : "<username_redacted>",
+            "password" : "<password_redacted>",
+            "mechanism" : "SCRAM-SHA-512"
+          }
+        },
+        "truststoreCertificates" : [ {
+          "pem" : "-----BEGIN CERTIFICATE-----\n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\n-----END CERTIFICATE-----\n",
+          "subject" : "CN=my-kafka-cluster-kafka, O=io.strimzi",
+          "issuer" : "CN=cluster-ca v0, O=io.strimzi",
+          "expiry" : 1761161684000
+        }, {
+          "pem" : "-----BEGIN CERTIFICATE-----\nMIIFLTCCAxWgAwIBAgIUV8CTiD59dAvdJ5ELkV2nBsTJluAwDQYJKoZIhvcNAQENBQAwLTETMBEGA1UECgwKaW8uc3RyaW16aTEWMBQGA1UEAwwNY2x1c3Rlci1jYSB2MDAeFw0yNTEwMjIxOTM0MzZaFw0yNjAxMjAxOTM0MzZaMC0xEzARBgNVBAoMCmlvLnN0cmltemkxFjAUBgNVBAMMDWNsdXN0ZXItY2EgdjAwggIiMA0GCSqGSIb3DQEBAQUAA4ICDwAwggIKAoICAQCHfrhcY1zQSaHPZAVfa2ki2zxmIx7k1pbsvsjYrnuZzUeL0ezmKcmcoo+Xsa8vCatfXBAtx1QjshALrISsQQF6N16EXeiHPNTget+CGY9wq5LUNGYpSXsudquRXtmlLDZDMObm+A46UjREe/YlP670SKcjA7XTS3ZvtMoiq1X4wgRww9Y5IZRZ7Lb+sxQPf0QDTegxqCCDjRBuzUIbyK/8pPe63bajsh5f28r6dAWXSkrZNU+Q8Itn0j1iyO3f/bMRVGwAX4i9wEh2FJB2E6hO3AcYx+qzct+KwJwdehvTSdNC9zQ1P/5yylC9KC0sA8lLF99iNYy4oVG8duuTGzTdfef3akNxSUT/Qy+uk3EWtEHyFXna77Eh3cRk6Si3O6RO7nm7qWw/Iq1uxX4Mg9qnHxsTblSB3mp34sGG/zYkDHh30YJT28cS9xMLbZ3hJdr6eXeV980ZGa76mtAXmqIOn/SizBboJn0TCzyFSfy+LQNKASnZEQ4eOuIeYJyvDrBQdXKClkcdx4tkVgQlJLfBHdIQTpC6y3cYQO+9BXT68umzOcnlnQogrpthPnsVf074XI8eZnlMtJ1eVf6QV8dmZAzem0HOfYIy+0qTvCdF4gg06gbpKvx94cfk6rhMVaQYKkPlYFaYO6zq6Bcaa3AsEKusYw1t/EYKI26+9YM+2wIDAQABo0UwQzAdBgNVHQ4EFgQUbyhl779W8dpMECStZHAlbbWsOKwwEgYDVR0TAQH/BAgwBgEB/wIBADAOBgNVHQ8BAf8EBAMCAQYwDQYJKoZIhvcNAQENBQADggIBAF5W6NTz1YBT4cldmK6Ay0HZhuqui28saCllZW0+GeGHA/70ICQrhQ2hLmEjjHmB07VD7akPgwYobEGP9JyG6C6HXE1ufZqTXldwLZNIIRWLPxp1sTD8DCWofpWZvizo/MK1dVpPHFwBBgYW9gENd4aToHX5axqDzXsc/pa3TKBHhB+gEApk8LqD4z560BPKlSWMECRHNctfkmtBHoIBZzKUx/a93PMucvJ8R/nbJJBoEtXpqLbM3m4t64D39KGVNk+WFkJPYStmHuhiWLSh9RA6DhKTcc6iulAIn8rV/DBYCom4kwLfejo+aWbqgdtwNwSF96jrOGg/QHKqzeKSSlAiHWLQuxKTG5irZvsoCrVrSE80zOzl1FCpokw1DeKNdTxgQ+Oh4Pe6kSb1aOqKizO6LVhN03Q8SjdiabT0WSp51Y/XHSKiAzxz7v8j3YGpIsU3J2+9HF/v31cGDIb6ADtbpY1edX7lt/RdMlAnFt7yeTMoPBw19MjNgr3nFC39sChBcroF8s3zno+FPDV3YSsczbAk4m2jMbCaBfETKxE5Wc5mg/kJiJLmwKpdqC4FRXGwme7EYaHp4spyDUqjAx38OHI1qL0EGTZAV82EJ756eYs8CJ81Olx1t+mUKzpuM/dQnFkfmbcJEbVmEBmzdSHfKX3tjQ/ZIdkFa+SLU76D\n-----END CERTIFICATE-----\n",
+          "subject" : "CN=cluster-ca v0, O=io.strimzi",
+          "issuer" : "CN=cluster-ca v0, O=io.strimzi",
+          "expiry" : 1761161676000
+        } ],
+        "bootstrapServers" : [ "my-kafka-cluster-kafka-external-bootstrap-event-automation.apps.68f8fec228840a3d9fc272bd.am1.techzone.ibm.com:443" ]
+      }
+    } ],
+    "edges" : [ {
+      "incoming" : "b495b00b-e15c-40d1-8a24-69687e14ed95",
+      "outgoing" : "7891eb22-5407-44b0-98d5-eb5291eafbcb"
+    }, {
+      "incoming" : "7891eb22-5407-44b0-98d5-eb5291eafbcb",
+      "outgoing" : "bcf61f2f-1c34-48c3-93fc-160f0b70d949"
+    }, {
+      "incoming" : "b5c14c76-9f0f-41d5-9ce5-b5792fe4a1ce",
+      "outgoing" : "bcf61f2f-1c34-48c3-93fc-160f0b70d949"
+    }, {
+      "incoming" : "b495b00b-e15c-40d1-8a24-69687e14ed95",
+      "outgoing" : "bc20fe7c-b27d-4940-b566-7f6355889a79"
+    }, {
+      "incoming" : "bc20fe7c-b27d-4940-b566-7f6355889a79",
+      "outgoing" : "2d6ce800-9456-4ecb-9453-b8fd58cf0574"
+    }, {
+      "incoming" : "bcf61f2f-1c34-48c3-93fc-160f0b70d949",
+      "outgoing" : "2d6ce800-9456-4ecb-9453-b8fd58cf0574"
+    }, {
+      "incoming" : "2d6ce800-9456-4ecb-9453-b8fd58cf0574",
+      "outgoing" : "a39669e7-7c2c-4675-8cfd-020b3a9b318c"
+    } ]
+  },
+  "flowDetails" : {
+    "flowName" : "Joining events - MD",
+    "flowDescription" : "",
+    "flowVersion" : 9
+  }
+}
