@@ -2,7 +2,7 @@ config:
   ORDERS:
     ORDERS___TABLE:
       properties.sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule
-        required username="<username_redacted>" password="<password_redacted>";
+        required username="eem-29cba41d-91fc-48c4-9619-df83099b12ac" password="c86f8d00-2309-4dcb-9958-a20c22de05ae";
       connector: kafka
       format: avro
       properties.bootstrap.servers: my-eem-gateway-ibm-egw-rt-event-automation.apps.68f8fec228840a3d9fc272bd.am1.techzone.ibm.com:443
@@ -21,7 +21,7 @@ config:
   Cancellations:
     Cancellations___TABLE:
       properties.sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule
-        required username="<username_redacted>" password="<password_redacted>";
+        required username="eem-45a3f5d2-e170-47ee-975a-f87be917e39f" password="e03330f1-f932-4b15-9833-92b009bba65d";
       connector: kafka
       format: avro
       properties.bootstrap.servers: my-eem-gateway-ibm-egw-rt-event-automation.apps.68f8fec228840a3d9fc272bd.am1.techzone.ibm.com:443
@@ -40,7 +40,7 @@ config:
   suspiciousorder:
     suspiciousorder:
       properties.sasl.jaas.config: org.apache.kafka.common.security.scram.ScramLoginModule
-        required username="<username_redacted>" password="<password_redacted>";
+        required username="es-admin" password="RDuPhNvo7yGXMBo1flEDUgPxv5PqhpvM";
       connector: kafka
       format: json
       properties.bootstrap.servers: my-kafka-cluster-kafka-external-bootstrap-event-automation.apps.68f8fec228840a3d9fc272bd.am1.techzone.ibm.com:443
